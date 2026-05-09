@@ -372,6 +372,38 @@ nav ul li a:hover::after {
     width: 100%;
 }
 
+/* Mobile Menu Toggle */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 101;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background-color: #00FFC8;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
 /* Hero Section */
 .hero {
     background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
@@ -831,7 +863,7 @@ footer {
     text-align: center;
     padding: 50px 0 30px;
     border-top: 1px solid rgba(0, 255, 200, 0.15);
-}}
+}
 
 .footer-content {
     display: grid;
@@ -895,18 +927,49 @@ section {
 
 /* Responsive */
 @media (max-width: 768px) {
-    nav .container {
-        flex-direction: column;
+    .menu-toggle {
+        display: flex;
     }
 
-    nav ul {
-        margin-top: 20px;
-        flex-direction: column;
+    nav .container {
+        flex-direction: row;
+        justify-content: space-between;
         align-items: center;
     }
 
+    nav h1 {
+        font-size: 1.2rem;
+    }
+
+    nav ul {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        left: 0;
+        background: rgba(20, 20, 20, 0.95);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        align-items: center;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        border-bottom: 1px solid rgba(0, 255, 200, 0.1);
+        margin: 0;
+        padding: 0;
+    }
+
+    nav ul.active {
+        max-height: 400px;
+        padding: 20px 0;
+    }
+
     nav ul li {
-        margin: 10px 0;
+        margin: 12px 0;
+        padding: 10px 20px;
+    }
+
+    nav ul li a {
+        font-size: 1rem;
     }
 
     .hero {
@@ -956,5 +1019,153 @@ section {
     .btn {
         padding: 14px 28px;
         font-size: 0.85rem;
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Reduce particle animations on small screens */
+    .particle {
+        animation: none !important;
+        opacity: 0.3;
+    }
+
+    .background-orb {
+        animation: none !important;
+        opacity: 0.1;
+    }
+
+    body::before,
+    body::after {
+        animation: none !important;
+    }
+
+    nav h1 {
+        font-size: 1rem;
+    }
+
+    .hero h2 {
+        font-size: 1.8rem;
+        margin-bottom: 10px;
+    }
+
+    .hero h3 {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+        margin-bottom: 25px;
+    }
+
+    .hero {
+        padding: 80px 0;
+    }
+
+    section {
+        padding: 60px 0;
+    }
+
+    section h2 {
+        font-size: 1.5rem;
+        margin-bottom: 30px;
+    }
+
+    section p {
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+    }
+
+    .stats {
+        gap: 20px;
+    }
+
+    .stat h3 {
+        font-size: 2rem;
+    }
+
+    .stat p {
+        font-size: 0.85rem;
+    }
+
+    section ul li {
+        width: 90%;
+        padding: 15px 20px;
+        margin: 10px auto;
+        font-size: 0.9rem;
+    }
+
+    .testimonial {
+        padding: 25px;
+        border-radius: 12px;
+    }
+
+    .testimonial p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .testimonial cite {
+        font-size: 0.85rem;
+    }
+
+    #contact-form {
+        max-width: 100%;
+        padding: 0 10px;
+    }
+
+    #contact-form input,
+    #contact-form textarea {
+        padding: 14px 14px;
+        font-size: 1rem; /* Prevents zoom on iOS */
+        border-radius: 8px;
+    }
+
+    #contact-form button {
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 0.9rem;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        text-align: center;
+    }
+
+    .footer-section p {
+        text-align: center;
+    }
+}
+
+@media (max-width: 350px) {
+    .hero h2 {
+        font-size: 1.4rem;
+    }
+
+    .hero h3 {
+        font-size: 0.95rem;
+    }
+
+    section h2 {
+        font-size: 1.3rem;
+    }
+
+    nav h1 {
+        font-size: 0.9rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
     }
 }
